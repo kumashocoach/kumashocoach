@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja" class="scroll-smooth">
 <head>
+    <!-- STREAMING_CHUNK:Configuring HTML head and Tailwind... -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>熊谷 奨 - 組織・パーソナルコーチ / 理学療法士</title>
@@ -61,6 +62,7 @@
         }
     </script>
     
+    <!-- STREAMING_CHUNK:Styling layout and animations... -->
     <style>
         body {
             background-color: #F8F9FA;
@@ -199,6 +201,7 @@
 
 <body class="font-sans antialiased selection:bg-accent selection:text-white">
 
+    <!-- STREAMING_CHUNK:Building the Navigation Bar... -->
     <!-- Navigation -->
     <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -239,6 +242,7 @@
         </div>
     </header>
 
+    <!-- STREAMING_CHUNK:Rendering the Mobile Menu... -->
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-white/95 backdrop-blur-lg flex-col pt-24 pb-8 px-6 overflow-y-auto">
         <button id="mobile-menu-close" class="absolute top-6 right-6 text-primary p-2 focus:outline-none" aria-label="Close">
@@ -265,6 +269,7 @@
         </nav>
     </div>
 
+    <!-- STREAMING_CHUNK:Constructing the Hero Section... -->
     <!-- 1. Hero Section -->
     <section id="hero" class="relative min-h-[100svh] pt-32 pb-20 lg:pt-0 lg:pb-0 flex items-center justify-center overflow-hidden bg-bglight">
         <div class="hero-bg-shapes">
@@ -334,6 +339,7 @@
         </div>
     </section>
 
+    <!-- STREAMING_CHUNK:Laying out the About Section... -->
     <!-- 2. About Section -->
     <section id="about" class="py-20 lg:py-32 bg-white relative">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -343,12 +349,11 @@
             </div>
 
             <div class="reveal-up delay-100 relative max-w-5xl mx-auto">
-                <!-- Changed to standard flex-col for mobile (image top), md:flex-row for desktop (image left) -->
                 <div class="flex flex-col md:flex-row gap-10 lg:gap-16 items-center md:items-start justify-between">
                     
-                    <!-- Left: Profile Image -->
+                    <!-- Left: Profile Image with robust fallback -->
                     <div class="w-full sm:w-2/3 md:w-5/12 lg:w-1/2 shrink-0">
-                        <img src="./profile.jpg" alt="熊谷 奨" class="w-full h-auto object-cover rounded-2xl shadow-xl" loading="lazy">
+                        <img src="./profile.jpg" onerror="this.onerror=null; this.src='profile.jpg';" alt="熊谷 奨" class="w-full h-auto object-cover rounded-2xl shadow-xl" loading="lazy">
                     </div>
 
                     <!-- Right: Text Content -->
@@ -391,6 +396,7 @@
         </div>
     </section>
 
+    <!-- STREAMING_CHUNK:Setting up the Skills Section... -->
     <!-- 3. Skills Section -->
     <section id="skills" class="py-20 lg:py-32 bg-bglight border-y border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -442,6 +448,7 @@
         </div>
     </section>
 
+    <!-- STREAMING_CHUNK:Formatting the Works & Results... -->
     <!-- 4. Works Section -->
     <section id="works" class="py-20 lg:py-32 bg-primary text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 32px 32px;"></div>
@@ -585,6 +592,7 @@
         </div>
     </section>
 
+    <!-- STREAMING_CHUNK:Adding the Contact Section... -->
     <!-- 5. Contact Section -->
     <section id="contact" class="py-20 lg:py-32 bg-white relative">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -615,6 +623,7 @@
         </div>
     </footer>
 
+    <!-- STREAMING_CHUNK:Initializing interactivity scripts... -->
     <!-- JavaScript for Interactions -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
