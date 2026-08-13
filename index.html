@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <!-- STREAMING_CHUNK:Configuring HTML head and Tailwind... -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>熊谷 奨 - 組織・パーソナルコーチ / 理学療法士</title>
+    <meta name="description" content="医療現場での10年以上の臨床推論と、認知科学に基づくコーチングを融合。一人ひとりのポテンシャルを最大化し、自走する組織づくりを伴走支援します。">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#1A365D', // Navy Blue
+                            light: '#2A4B7C',
+                            dark: '#0F213A'
+                        },
+                        accent: {
+                            DEFAULT: '#D4AF37', // Amber Gold
+                            light: '#E6C865',
+                            dark: '#B08D23'
+                        },
+                        bglight: '#F8F9FA', // Pale Gray
+                        surface: '#FFFFFF',
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        serif: ['"Noto Serif JP"', 'serif'],
+                        display: ['"Cormorant Garamond"', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(26, 54, 93, 0.08)',
+                        'gold-glow': '0 10px 30px -10px rgba(212,175,55,0.4)',
+                        'inner-light': 'inset 0 1px 0 0 rgba(255,255,255,0.8)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 15s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- STREAMING_CHUNK:Styling layout and animations... -->
+    <style>
+        body {
+            background-color: #F8F9FA;
+            color: #1A365D;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background-color: #D4AF37;
+            color: #fff;
+        }
+
+        html { font-size: 16px; }
+        @media (min-width: 1024px) { html { font-size: 18px; } }
+
+        /* Scroll Animations */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .is-revealed {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+
+        /* Hero Background Effect */
+        .hero-bg-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .shape-1 {
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(248,249,250,0) 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+
+        .shape-2 {
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(26,54,93,0.08) 0%, rgba(248,249,250,0) 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+
+        /* Fancy Heading Accent */
+        .heading-line {
+            display: inline-block;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .heading-line::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #D4AF37;
+            transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .is-revealed .heading-line::after {
+            width: 100%;
+        }
+        
+        /* Premium Button Hover */
+        .btn-premium {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+        .btn-premium:hover::before {
+            left: 100%;
+        }
+
+        /* Mobile Menu Transitions */
+        #mobile-menu {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #mobile-menu.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #mobile-menu.flex {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased selection:bg-accent selection:text-white">
+
+    <!-- STREAMING_CHUNK:Building the Navigation Bar... -->
+    <!-- Navigation -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo / Name (Visible mainly on mobile for balance) -->
+                <div class="lg:hidden">
+                    <a href="#" class="text-xl font-serif font-bold text-primary tracking-wide">Sho Kumagai</a>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden lg:flex items-center space-x-8 ml-auto">
+                    <a href="#about" class="text-sm font-medium text-gray-600 hover:text-accent transition-colors">自己紹介</a>
+                    <a href="#skills" class="text-sm font-medium text-gray-600 hover:text-accent transition-colors">3つの強み</a>
+                    <a href="#works" class="text-sm font-medium text-gray-600 hover:text-accent transition-colors">実績</a>
+                    
+                    <!-- SNS Icons -->
+                    <div class="flex items-center gap-4 pl-6 border-l border-gray-200">
+                        <a href="https://x.com/kumasho_coach" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-primary transition-colors" aria-label="X (Twitter)">
+                            <i class="fa-brands fa-x-twitter text-lg"></i>
+                        </a>
+                        <a href="https://note.com/s_kumagai_coach" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-primary transition-colors flex items-center" aria-label="note">
+                            <span class="font-black text-[14px] tracking-tighter lowercase leading-none mt-[2px]">note</span>
+                        </a>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <a href="#contact" class="btn-premium bg-primary text-white px-6 py-2.5 rounded text-sm font-medium hover:bg-primary-dark transition-all shadow-md">
+                        お問い合わせ
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden text-primary p-2 focus:outline-none" aria-label="Menu">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- STREAMING_CHUNK:Rendering the Mobile Menu... -->
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-white/95 backdrop-blur-lg flex-col pt-24 pb-8 px-6 overflow-y-auto">
+        <button id="mobile-menu-close" class="absolute top-6 right-6 text-primary p-2 focus:outline-none" aria-label="Close">
+            <i class="fa-solid fa-xmark text-3xl"></i>
+        </button>
+        
+        <nav class="flex flex-col items-center gap-8 mt-12">
+            <a href="#about" class="mobile-link text-2xl font-serif text-primary hover:text-accent transition-colors">自己紹介</a>
+            <a href="#skills" class="mobile-link text-2xl font-serif text-primary hover:text-accent transition-colors">3つの強み</a>
+            <a href="#works" class="mobile-link text-2xl font-serif text-primary hover:text-accent transition-colors">実績</a>
+            
+            <div class="flex items-center gap-6 mt-4">
+                <a href="https://x.com/kumasho_coach" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:text-primary hover:border-primary transition-colors shadow-sm bg-white" aria-label="X (Twitter)">
+                    <i class="fa-brands fa-x-twitter text-xl"></i>
+                </a>
+                <a href="https://note.com/s_kumagai_coach" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:text-primary hover:border-primary transition-colors shadow-sm bg-white" aria-label="note">
+                    <span class="font-black text-[14px] tracking-tighter lowercase leading-none mt-[2px]">note</span>
+                </a>
+            </div>
+
+            <a href="#contact" class="mobile-link btn-premium bg-primary text-white px-10 py-4 rounded-full text-lg font-medium hover:bg-primary-dark transition-all shadow-md mt-8 w-full text-center">
+                お問い合わせ
+            </a>
+        </nav>
+    </div>
+
+    <!-- STREAMING_CHUNK:Constructing the Hero Section... -->
+    <!-- 1. Hero Section -->
+    <section id="hero" class="relative min-h-[100svh] pt-32 pb-20 lg:pt-0 lg:pb-0 flex items-center justify-center overflow-hidden bg-bglight">
+        <div class="hero-bg-shapes">
+            <div class="shape-1"></div>
+            <div class="shape-2"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center h-full">
+                
+                <!-- Left: Copywriting -->
+                <div class="max-w-2xl">
+                    <div class="reveal-up">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-primary leading-[1.3] mb-6">
+                            「事実と解釈」を紐解き、<br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">人と組織の歪みを整える。</span>
+                        </h1>
+                    </div>
+                    
+                    <div class="reveal-up delay-100">
+                        <p class="text-base sm:text-lg text-gray-600 leading-relaxed mb-10 border-l-2 border-accent pl-4">
+                            医療現場での10年以上の臨床推論と、認知科学に基づくコーチングを融合。<br>
+                            現場のリーダー育成から、チームのシステム再構築まで。<br>
+                            一人ひとりのポテンシャルを最大化し、自走する組織づくりを伴走支援します。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Visual -->
+                <div class="relative reveal-left delay-300 h-[400px] sm:h-[500px] lg:h-[600px] flex items-center justify-center w-full">
+                    <div class="relative w-full max-w-sm lg:max-w-md aspect-square flex items-center justify-center scale-90 sm:scale-100">
+                        
+                        <div class="absolute w-[100%] h-[100%] rounded-full border border-gray-200/60"></div>
+                        <div class="absolute w-[75%] h-[75%] rounded-full border border-gray-200/80"></div>
+                        <div class="absolute w-[50%] h-[50%] rounded-full border border-accent/20"></div>
+
+                        <svg class="absolute inset-0 w-full h-full text-gray-300/80 -z-10" viewBox="0 0 100 100">
+                            <path d="M20 20 L80 80" stroke="currentColor" stroke-width="0.4" fill="none" stroke-dasharray="2 3" />
+                        </svg>
+
+                        <!-- Nodes -->
+                        <div class="absolute top-[18%] left-[0%] bg-white/95 backdrop-blur-sm px-5 py-3 sm:px-7 sm:py-5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] animate-float" style="animation-delay: 0s;">
+                            <p class="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1 sm:mb-1.5">Observation</p>
+                            <p class="text-sm sm:text-lg font-serif text-primary font-bold tracking-wide">事実 (Fact)</p>
+                        </div>
+                        
+                        <div class="absolute z-10 w-24 h-24 sm:w-32 sm:h-32 bg-white rounded-full shadow-[0_10px_40px_-10px_rgba(26,54,93,0.12)] flex items-center justify-center transition-transform hover:scale-105 duration-500">
+                            <i class="fa-solid fa-brain text-3xl sm:text-4xl text-primary"></i>
+                        </div>
+
+                        <div class="absolute bottom-[18%] right-[0%] bg-white/95 backdrop-blur-sm px-5 py-3 sm:px-7 sm:py-5 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] animate-float" style="animation-delay: -2s;">
+                            <p class="text-[9px] sm:text-[10px] font-bold text-accent uppercase tracking-widest mb-1 sm:mb-1.5">Cognition</p>
+                            <p class="text-sm sm:text-lg font-serif text-primary font-bold tracking-wide">解釈 (Interpretation)</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 reveal-up delay-400 hidden sm:flex">
+            <span class="text-xs tracking-widest text-gray-400 font-medium uppercase">Scroll</span>
+            <div class="w-[1px] h-12 bg-gray-300 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1/2 bg-primary animate-[float_2s_ease-in-out_infinite]"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STREAMING_CHUNK:Laying out the About Section... -->
+    <!-- 2. About Section -->
+    <section id="about" class="py-20 lg:py-32 bg-white relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="mb-12 lg:mb-16 text-center reveal-up">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-primary heading-line">自己紹介</h2>
+            </div>
+
+            <div class="reveal-up delay-100 relative max-w-5xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-10 lg:gap-16 items-center md:items-start justify-between">
+                    
+                    <!-- Left: Profile Image -->
+                    <div class="w-full sm:w-2/3 md:w-5/12 lg:w-1/2 shrink-0">
+                        <!-- onerror魔法：ローカルで画像が見つからない場合のみダミー画像を表示します -->
+                        <img src="./profile.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x1200/1A365D/FFFFFF?text=Profile+Image';" alt="熊谷 奨" class="w-full h-auto object-cover rounded-2xl shadow-xl" loading="lazy">
+                    </div>
+
+                    <!-- Right: Text Content -->
+                    <div class="flex-1 w-full">
+                        <div class="mb-8 lg:mb-10">
+                            <p class="text-accent font-bold tracking-widest text-xs sm:text-sm mb-3 uppercase">Organization & Personal Coach / PT</p>
+                                
+                            <div class="flex flex-wrap items-end gap-4 mb-1">
+                                <h3 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-primary leading-none">熊谷 奨</h3>
+                                
+                                <div class="flex items-center gap-2 pb-1">
+                                    <a href="https://x.com/kumasho_coach" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-colors shadow-sm bg-white" aria-label="X (Twitter)">
+                                        <i class="fa-brands fa-x-twitter text-sm"></i>
+                                    </a>
+                                    <a href="https://note.com/s_kumagai_coach" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-colors shadow-sm bg-white" aria-label="note">
+                                        <span class="font-black text-[10px] tracking-tighter lowercase leading-none mt-[1px]">note</span>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-400 font-display text-lg sm:text-xl lg:text-2xl italic mb-3">Sho Kumagai</p>
+                        </div>
+
+                        <div class="prose prose-lg text-gray-600 prose-p:leading-relaxed max-w-none">
+                            <p class="font-medium text-gray-900 border-l-2 border-gray-300 pl-4 mb-6">
+                                はじめまして、熊谷 奨です。<br>
+                                これまで10年以上、理学療法士として医療現場に立つ中で、東日本大震災での被災という原体験を経て「人の持つ本質的な強さ」を確信するようになりました。
+                            </p>
+                            <p>
+                                私が関わりの中で大切にしているのは、<strong>”Do＝介入”を手放し、”Be＝存在”を信じること</strong>です。
+                            </p>
+                            <p>
+                                相手を変えようとするのではなく、私自身の人間味や不完全さを解放し、絶対的な触媒としてただそこに在る。その安心感の中で、相手が奥底にある本音を言葉にし、本来の姿を取り戻していく。そんな変容の場を創り出しています。
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STREAMING_CHUNK:Setting up the Skills Section... -->
+    <!-- 3. Skills Section -->
+    <section id="skills" class="py-20 lg:py-32 bg-bglight border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-16 lg:mb-20 reveal-up">
+                <span class="text-accent font-bold tracking-widest text-xs lg:text-sm mb-2 block uppercase">Core Competencies</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-primary heading-line">3つの強み</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+                
+                <div class="bg-white p-6 lg:p-8 rounded-2xl shadow-soft hover:-translate-y-2 transition-transform duration-300 reveal-up">
+                    <div class="w-12 h-12 lg:w-14 lg:h-14 bg-primary/5 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-regular fa-eye text-xl lg:text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-lg lg:text-xl font-bold text-primary mb-4 leading-tight">
+                        臨床現場で培った圧倒的な<br>「観察眼と対話力」
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        15年にわたる病院勤務と理学療法士としての経験から、言葉にならない相手の感情や状態を汲み取る力に長けています。相手の心に寄り添う高い共感力で、安心して本音を話せる心理的安全性の高い場を構築します。
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 lg:p-8 rounded-2xl shadow-soft hover:-translate-y-2 transition-transform duration-300 reveal-up delay-100">
+                    <div class="w-12 h-12 lg:w-14 lg:h-14 bg-primary/5 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-layer-group text-xl lg:text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-lg lg:text-xl font-bold text-primary mb-4 leading-tight">
+                        認知科学に基づく<br>「ロジカルなアプローチ」
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        感情論に終始せず、「事実と解釈」を明確に切り分ける認知科学に基づいたコーチングを提供します。経営者やマネージャー層への組織マネジメント研修でも実証済みの、極めて論理的で再現性の高いアプローチです。
+                    </p>
+                </div>
+
+                <div class="bg-white p-6 lg:p-8 rounded-2xl shadow-soft hover:-translate-y-2 transition-transform duration-300 reveal-up delay-200">
+                    <div class="w-12 h-12 lg:w-14 lg:h-14 bg-primary/5 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-gears text-xl lg:text-2xl text-accent"></i>
+                    </div>
+                    <h3 class="text-lg lg:text-xl font-bold text-primary mb-4 leading-tight">
+                        成長を加速させる<br>「体系化と仕組み化」
+                    </h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        後進の育成カリキュラム設計や、最新のAIプロンプトを活用した臨床推論の言語化など、暗黙知を「仕組み化」することを得意としています。感覚に頼らない、具体的かつ実践的なロードマップで目標達成へと導きます。
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- STREAMING_CHUNK:Formatting the Works & Results... -->
+    <!-- 4. Works Section -->
+    <section id="works" class="py-20 lg:py-32 bg-primary text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center mb-16 lg:mb-20 reveal-up">
+                <span class="text-accent font-bold tracking-widest text-xs lg:text-sm mb-2 block uppercase">Case Studies & Results</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-white heading-line after:bg-white">実績</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
+                
+                <!-- Result 01 -->
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:bg-white/10 transition-colors reveal-up">
+                    <div class="flex items-baseline gap-3 lg:gap-4 mb-4 border-b border-white/10 pb-4">
+                        <span class="text-3xl lg:text-4xl font-display font-bold text-accent">01.</span>
+                        <h3 class="text-lg lg:text-xl font-bold">プリセプター育成プロジェクト</h3>
+                    </div>
+                    <p class="text-sm text-gray-300 mb-6 lg:mb-8 leading-relaxed">
+                        指導に対する自己評価の変化と、確実な時間の投資を数値化。
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-gray-400 mb-3">指導に対する自己評価スコア</p>
+                            <div class="grid grid-cols-2 gap-3 lg:gap-4">
+                                <div class="bg-black/30 p-3 lg:p-4 rounded-xl border border-white/5">
+                                    <span class="block text-[10px] lg:text-xs text-gray-500 mb-1">Before</span>
+                                    <div class="flex items-end gap-1 mb-2">
+                                        <span class="text-2xl lg:text-3xl font-bold text-gray-400">3.0</span><span class="text-xs lg:text-sm pb-1 text-gray-500">点</span>
+                                    </div>
+                                    <p class="text-[9px] lg:text-[10px] text-gray-400 leading-tight">「何も正解かも分からず、ただ『できていない』と感じる状態」</p>
+                                </div>
+                                <div class="bg-accent/10 p-3 lg:p-4 rounded-xl border border-accent/20 relative overflow-hidden">
+                                    <div class="absolute -right-4 -top-4 w-12 lg:w-16 h-12 lg:h-16 bg-accent/20 rounded-full blur-xl"></div>
+                                    <span class="block text-[10px] lg:text-xs text-accent mb-1 relative z-10">After</span>
+                                    <div class="flex items-end gap-1 mb-2 relative z-10">
+                                        <span class="text-2xl lg:text-3xl font-bold text-white">4.5</span><span class="text-xs lg:text-sm pb-1 text-gray-300">点</span>
+                                    </div>
+                                    <p class="text-[9px] lg:text-[10px] text-gray-300 leading-tight relative z-10">「指導の難しさや自分の課題が『具体的に』見えてきた状態」へと解像度が向上</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result 02 -->
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:bg-white/10 transition-colors reveal-up delay-100">
+                    <div class="flex items-baseline gap-3 lg:gap-4 mb-4 border-b border-white/10 pb-4">
+                        <span class="text-3xl lg:text-4xl font-display font-bold text-accent">02.</span>
+                        <h3 class="text-lg lg:text-xl font-bold">コーチング研修</h3>
+                    </div>
+                    <p class="text-sm text-gray-300 mb-6 lg:mb-8 leading-relaxed">
+                        「無意識の指導の限界」への気づきから、マインドの確実なシフトを数値で証明。
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-gray-400 mb-3">自身の在り方・マインドの評価（10点満点）</p>
+                            <div class="grid grid-cols-2 gap-3 lg:gap-4 mb-4">
+                                <div class="bg-black/30 p-3 lg:p-4 rounded-xl border border-white/5">
+                                    <span class="block text-[10px] lg:text-xs text-gray-500 mb-1">Before</span>
+                                    <div class="flex items-end gap-1 mb-2">
+                                        <span class="text-2xl lg:text-3xl font-bold text-gray-400">2.29</span><span class="text-xs lg:text-sm pb-1 text-gray-500">点</span>
+                                    </div>
+                                    <p class="text-[9px] lg:text-[10px] text-gray-400 leading-tight">無意識の指導に限界を感じた「意識的無能」の現在地</p>
+                                </div>
+                                <div class="bg-accent/10 p-3 lg:p-4 rounded-xl border border-accent/20 relative overflow-hidden">
+                                     <div class="absolute -right-4 -top-4 w-12 lg:w-16 h-12 lg:h-16 bg-accent/20 rounded-full blur-xl"></div>
+                                    <span class="block text-[10px] lg:text-xs text-accent mb-1 relative z-10">After</span>
+                                    <div class="flex items-end gap-1 mb-2 relative z-10">
+                                        <span class="text-2xl lg:text-3xl font-bold text-white">5.86</span><span class="text-xs lg:text-sm pb-1 text-gray-300">点</span>
+                                    </div>
+                                    <p class="text-[9px] lg:text-[10px] text-gray-300 leading-tight relative z-10">受講者の71.5%が5以上のポジティブな変化を実感</p>
+                                </div>
+                            </div>
+                            <div class="bg-white/10 rounded-lg p-3 flex items-center justify-between border border-white/5">
+                                <span class="text-xs lg:text-sm font-medium text-gray-300">行動変容率</span>
+                                <div class="text-right">
+                                    <span class="text-lg lg:text-xl font-bold text-accent">100%</span>
+                                    <p class="text-[9px] lg:text-[10px] text-gray-400">全受講者が実践内容を言語化</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result 03 -->
+                <div class="lg:col-span-2 bg-white/5 border border-white/10 rounded-2xl p-6 lg:p-8 backdrop-blur-sm hover:bg-white/10 transition-colors reveal-up delay-200">
+                    <div class="flex flex-col md:flex-row gap-6 lg:gap-8">
+                        
+                        <div class="md:w-1/3 md:border-r border-white/10 md:pr-8">
+                            <div class="flex items-baseline gap-3 lg:gap-4 mb-4">
+                                <span class="text-3xl lg:text-4xl font-display font-bold text-accent">03.</span>
+                                <h3 class="text-lg lg:text-xl font-bold leading-tight">役職者向け「人間の原理原則」マネジメント研修</h3>
+                            </div>
+                            <p class="text-sm text-gray-300 leading-relaxed">
+                                研修前を「0点」と定義した評価指標で、受講者の実践意識の劇的な向上を可視化。
+                            </p>
+                        </div>
+
+                        <div class="md:w-2/3 grid sm:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-xs uppercase tracking-widest text-gray-400 mb-3 border-b border-white/10 pb-2">未来を創る「前進コミュニケーション」実践度</p>
+                                <div class="flex items-center gap-4 mb-2">
+                                    <div class="text-center">
+                                        <span class="block text-[9px] lg:text-[10px] text-gray-500">Before</span>
+                                        <span class="text-lg lg:text-xl font-bold text-gray-400">0<span class="text-[10px] lg:text-xs font-normal">点</span></span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                                    <div>
+                                        <span class="block text-[9px] lg:text-[10px] text-accent">After</span>
+                                        <span class="text-2xl lg:text-3xl font-bold text-white">8<span class="text-xs lg:text-sm font-normal text-gray-300">点ベース</span></span>
+                                    </div>
+                                </div>
+                                <p class="text-[9px] lg:text-[10px] text-gray-400 leading-tight">受講者の71.4%が10点満点中「8点」。全受講者が6点以上と回答。</p>
+                            </div>
+
+                            <div>
+                                <p class="text-xs uppercase tracking-widest text-gray-400 mb-3 border-b border-white/10 pb-2">人間の原理原則に対する理解度</p>
+                                <div class="flex items-center gap-4 mb-2">
+                                    <div class="text-center">
+                                        <span class="block text-[9px] lg:text-[10px] text-gray-500">Before</span>
+                                        <span class="text-lg lg:text-xl font-bold text-gray-400">0</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                                    <div>
+                                        <span class="block text-[9px] lg:text-[10px] text-accent">After</span>
+                                        <span class="text-2xl lg:text-3xl font-bold text-white">85.7<span class="text-xs lg:text-sm font-normal text-gray-300">%</span></span>
+                                    </div>
+                                </div>
+                                <p class="text-[9px] lg:text-[10px] text-gray-400 leading-tight">受講者の85.7%が理解が「深まった」以上と回答。全員が「ある程度」以上を記録。</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- STREAMING_CHUNK:Adding the Contact Section... -->
+    <!-- 5. Contact Section -->
+    <section id="contact" class="py-20 lg:py-32 bg-white relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <div class="mb-10 lg:mb-12 reveal-up">
+                <span class="text-accent font-bold tracking-widest text-xs lg:text-sm mb-2 block uppercase">Get in Touch</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-primary heading-line">お問い合わせ</h2>
+                <p class="mt-6 text-gray-600 text-sm md:text-base">
+                    ご相談はお気軽にどうぞ。<br>
+                    3営業日以内に返信いたします。
+                </p>
+            </div>
+
+            <div class="reveal-up delay-100 pb-12 lg:pb-16">
+                <a href="https://forms.gle/jb2RJmFB4wmTPH4e6" target="_blank" rel="noopener noreferrer" class="btn-premium inline-flex justify-center items-center gap-3 bg-primary text-white font-medium py-3 px-8 sm:py-4 sm:px-12 rounded-full transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 w-full sm:w-auto text-base sm:text-lg">
+                    <span>ご相談フォームはこちら</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary-dark text-gray-400 py-8 lg:py-10 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 flex justify-center items-center">
+            <p class="text-[10px] sm:text-xs tracking-wider">&copy; 2026 Sho Kumagai. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- STREAMING_CHUNK:Initializing interactivity scripts... -->
+    <!-- JavaScript for Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            /* --- Navbar Scroll Effect --- */
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md', 'py-1');
+                    navbar.classList.remove('py-0');
+                } else {
+                    navbar.classList.remove('shadow-md', 'py-1');
+                    navbar.classList.add('py-0');
+                }
+            });
+
+            /* --- Mobile Menu Toggle --- */
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function toggleMenu() {
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMenu);
+            mobileMenuClose.addEventListener('click', toggleMenu);
+            
+            // Close menu when a link is clicked
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if(!mobileMenu.classList.contains('hidden')){
+                        toggleMenu();
+                    }
+                });
+            });
+
+
+            /* --- Intersection Observer for Scroll Animations --- */
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+            revealElements.forEach(el => observer.observe(el));
+
+
+            /* --- Smooth Scroll for Anchor Links --- */
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    if (this.getAttribute('target') === '_blank') return;
+                    
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  
+                        window.scrollTo({
+                             top: offsetPosition,
+                             behavior: "smooth"
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```eof
